@@ -1,6 +1,6 @@
 /* CSS */
 body {
-  font-family: Roboto Arial, "Helvetica Neue", Helvetica, sans-serif;
+  font-family: Roboto, Arial, "Helvetica Neue", Helvetica, sans-serif;
   line-height: 34px;
   color:#fff;
   background: black;
@@ -34,6 +34,14 @@ footer,
 
 /* end sticky footer styling */
 
+p {
+  font-family:'Courier New', Courier, monospace;
+  font-style: italic;
+  font-weight: 7s00;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
 #logo {
   /* float: left; */
   width: 250px;
@@ -46,17 +54,19 @@ footer,
   text-align: center;
 }
 
-section, .main-row, #main-container{
+ .main-row, #main-container{
   width: 500px;
   max-width: 100%;
   margin: 0 auto;
   text-align: center;
+  border-radius: 5px;
 }
 
  img {
   width: 100%;
   height: auto;
   margin: 15px auto;
+  border-radius: 10px;
 }
 
 /* Footer */
