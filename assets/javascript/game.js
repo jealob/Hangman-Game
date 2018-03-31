@@ -1,106 +1,120 @@
 // JS for the Hangman game.
 
-alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
-console.log(alphabet);
-var tarDiv = document.getElementById("current-word");
-// var word = document.createElement("div");
-// word.textContent = alphabet;
-// tarDiv.appendChild(word);
-tarDiv.innerHTML = alphabet;
-
-// Call back for when the page is ready...
-$(document).ready(function() {
-    var wins  = 0;
-    var guessLetter = "";
-    var guessWord = [];
-    var guessRemain = 12;
-    var currentWord;
-    var wordList = ["memo", "paper", "printer", "shelf", "ink", "pen", "conference"];
-    // var wordList = ["busta rhymes","nicli minaj","rick ross","ludacris","kanye west","the game","nas","wayne","notorious big","jay z","","dmx","warren g","eminem","missy elliot","ll cool j","fifty cent","tupac", "snoppy dog","dr dre"];
-    startGame(wordList);
-    function startGame(wordList) {
-        currentWord  = wordList[Math.floor(Math.random() * wordList.length)];
-        console.log(currentWord);
-    }
-
 //Call back for when document is fully render to the browser
 $(document).ready(function(){
+
     // Declare global variables
-    var currentWord;
-    var currentWordDisplay;
+
+    var wordList = ["memo", "paper", "printer", "shelf", "ink", "pen", "conference"];
+    // var wordList = ["busta rhymes","nicli minaj","rick ross","ludacris","kanye west","the game","nas","wayne","notorious big","jay z","","dmx","warren g","eminem","missy elliot","ll cool j","fifty cent","tupac", "snoppy dog","dr dre"];
+    var word= "MERRY";
+    // var wordDisplay;
     var allGuesses;
+    var rightGuesses;
+    var wrongGuesses;
     var presentGuess;
     var positionInWord;
-    var positionInGuesses;
-    var positionInDisplay;
-    var wordList = ["memo", "paper", "printer", "shelf", "ink", "pen", "conference"];
+    // var positionInGuesses;
+    // var positionInDisplay;
+    var currentWord;
     var guessRemain;
+    var wins = 0;
+    var losses = 0;
+
     // Start the Hangman game
-    // debugger;
-    startGame(wordList);
-    // This function is run whenever the user presses a key.
-    // for (var i = 0; i < guessRemain; i--){
+
+    startGame();
+        
+    document.onkeypress = function(event) { //keypress callback function
         // debugger;
-    document.onkeypress = function(event) {    
-    checkGuessRemain();    // Check if round is over on a keyup event
+        presentGuess = event.key.toUpperCase(); // Returns pressed key.
+        
+        //Check if already guessed and return position in allGuesses
+        if (allGuesses.search(presentGuess) === -1) { //make sure not to repeat both right or wrong guesses 
+            allGuesses += presentGuess;
+            console.log("all guesses: " + allGuesses);
+            letterChecker();    // Check if guess is right or wrong
+            if (word === rightGuesses) {
+                //debugger;
+                wins++;
+                console.log("Wins!!! Next Round");
+                startGame();
+            }
+
+            if (guessRemain < 1) {
+                losses++;
+                console.log("Lose!!! Next Round");
+                startGame();
+            }
+        }
+        displayGame();
     };
-    // }
 
-    function startGame(bank) {
+    function startGame() {
         // debugger;
-        currentWordDisplay =  "";
+        // wordDisplay =  "";
         allGuesses = "";
-        currentWord  = (bank[Math.floor(Math.random() * bank.length)]).toUpperCase();
-        guessRemain = currentWord.length;
-        return guessRemain;
-    }
+        wrongGuesses = "";
+        //word  = (wordList[Math.floor(Math.random() * wordList.length)]).toUpperCase();
+        guessRemain = word.length;
+        currentWord  = (" " * guessRemain);
+        rightGuesses = "";
+        //return guessRemain;
+    };
 
-    function letterCheck() {
+    function letterChecker() { // Check if guess is right or wrong
+        positionInWord = word.search(presentGuess); //Check if in  word and return position in word
         if (positionInWord === -1) { //letter not in word
-            console.log("Not Found");
-            // console.log("all geusses: " + allGuesses);
-            positionInGuesses = allGuesses.search(presentGuess);//Check if already guessed and return position in allGuesses
-            if (positionInGuesses === -1) {
-                guessRemain --; // reduce guesses remaining by one 
-                allGuesses += presentGuess + ' '; // Add to allGuesses already made. Does not require an array or for loop
-                console.log("add to guesses");
-                console.log("all geusses: " + allGuesses);
-            }
-            else {
-                console.log("don't add to guesses");
-                console.log("all geusses: " + allGuesses);
-                // guessRemain--; Do not need to reduce guesses here as it might affect future accidental key press of correct key guesses.
-                }
-            }
-        else { // letter in word
-            console.log("Found");
-            positionInDisplay = currentWordDisplay.search(presentGuess);
-            if (positionInDisplay === -1) {
-                currentWordDisplay += presentGuess + ' '; // For loop to go through array    
-                console.log("current word display: " + currentWordDisplay);
-                // break; 
-            }
-            else {
-                console.log("current word display: " + currentWordDisplay);
-            }
-            
+            isWrong();
         }
-    }
-    function checkGuessRemain() { // Check if round is over
-        while (guessRemain >= 1) {
-            presentGuess = event.key.toUpperCase(); // Returns pressed key.
-            console.log(presentGuess);
-            positionInWord = currentWord.search(presentGuess); //Check if in current word and return position in currentWord
-            letterCheck();
-            console.log(guessRemain);
+        else { //letter in word
+            isRight(positionInWord);
         }
-        // else {
-            // console.log("Game Over");
-            startGame(wordList);
-        // }
-    }
+        console.log(guessRemain);
+    };
 
-});
+    function isRight(pos) {
+        // rightGuesses = rightGuesses.splice(positionInWord, 0, presentGuess);
+        // debugger;   
+        for (var i =  pos; i < word.length; i++){
+            if (word[i] === presentGuess){
+                console.log("double letter found");
+                rightGuesses = insert(rightGuesses, pos, presentGuess);
+                // rightGuesses = word[i];
+            }
+        }
+        console.log("right guesses: " + rightGuesses);
+        return rightGuesses;
+    };
 
+    function isWrong() {
+        guessRemain--; // reduce guesses remaining by one 
+        wrongGuesses += presentGuess + " ";  // Add to wronglGuesses. Does not require an array or for loop
+        console.log("wrong guesses: " + wrongGuesses);
+        return wrongGuesses;
+    };
 
-});
+    function insert(str, index, value) {
+    return str.substr(0, index) + value + str.substr(index);
+    }   
+    function displayGame(){
+        // Creating a variable to hold our new HTML. Our HTML now keeps track of the user and computer guesses, and wins/losses/ties.
+        
+        var html =
+        "<p>PRESS ANY KEY TO GET STARTED!</p>" +
+        "<p>WINS</p>" +
+        "<p> " + wins + "</p>" +
+        "<p>LOSSES</p>" +
+        "<p> " + losses + "</p>" +
+        "<p>CURRENT WORD</p>" +
+        "<p> " + currentWord + "</p>" +
+        "<p>NUMBER OF GUESSES REMAINING</p>" +
+        "<p> " + guessRemain + "</p>" +
+        "<p>LETTERS ALREADY GUESSED</p>" +
+        "<p> " + wrongGuesses + "</p>";
+
+        // Set the inner HTML contents of the #game div to our html string
+        document.querySelector("#game").innerHTML = html;
+    };
+
+    });

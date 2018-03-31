@@ -15,12 +15,12 @@
         <div class="container">
             <a class="navbar-brand" id = "logo" href="index.html">Alex Obaseki</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon">
             </button>
             <div class="collapse navbar-collapse " id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.html">About <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="index.html">About <span class="sr-only">(current)</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="portfolio.html">Portfolio</a>
@@ -44,24 +44,28 @@
                     <div class="col border text-center">
                         <img  src = "assets/images/hangman-rap.png" alt = "work-picture">
                     </div>
-                    <div class="col border text-center game-panel">
-                        <p>PRESS ANY KEY TO GET STARTED!</p>
+                    <div class="col border text-center game-panel" id = "game">
+                        <p >PRESS ANY KEY TO GET STARTED!</p>
                         
                         <p> WINS</p>
                         
-                        <span id="wins"></span>
+                        <p>0</p>
+
+                        <p> LOSSES</p>
+                        
+                        <p>0</p>
 
                         <p>CURRENT WORD</p>
 
-                        <span id="current-word"><p> _ _ _ _ _ _ _ </p></span>
+                        <p> _ _ _ _ _ _ _ </p>
 
                         <p>NUMBER OF GUESSES REMAINING</p>
                         
-                        <span id="guess-remain"><p>12</p></span>
+                        <p>0</p>
 
                         <p>LETTERS ALREADY GUESSED</p>
 
-                        <span id="guessed-letters"><p> </p></span>
+                        <p>_ _ _ _ _ _ _  </p>
                         
                     </div>
                 </div>
