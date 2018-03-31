@@ -6,7 +6,7 @@ $(document).ready(function(){
     // Declare global variables
 
     // var wordList = ["memo", "paper", "printer", "shelf", "ink", "pen", "conference"];
-    var wordList = ["bustarhymes","nicliminaj","rickross","ludacris","kanyewest","thegame","nas","wayne","notoriousbig","jayz","","dmx","warreng","eminem","missyelliot","llcoolj","fiftycent","tupac", "snoppy dog","dr dre"];
+    var wordList = ["bustarhymes","nicliminaj","rickross","ludacris","kanyewest","thegame","nas","wayne","notoriousbig","jayz","","dmx","warreng","eminem","missyelliot","llcoolj","fiftycent","tupac", "snoppydog","drdre"];
     // var wordString = "MERRY";
     var word =[];
     var allGuesses;
@@ -43,7 +43,7 @@ $(document).ready(function(){
     };
 
     // Restarts after every round
-    function startGame() {w
+    function startGame() {
         allGuesses = "";
         wordString  = (wordList[Math.floor(Math.random() * wordList.length)]).toUpperCase(); //Randomly selects a word from the array wordList
         guessRemain = wordString.length; 
