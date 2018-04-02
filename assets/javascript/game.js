@@ -77,28 +77,19 @@ $(document).ready(function(){
     function letterChecker() { // Check if guess is right or wrong
         positionInWord = wordString.search(presentGuess); //Check if in  word and return position in word
         if (positionInWord === -1) { //letter not in word
-            isWrong();
+            keySound("assets/images/wrong.mp3");
+            guessRemain--;
+            wrongGuesses += presentGuess + ","; // Add to wronglGuesses. Does not require an array or for loop
         }
         else { //letter in word
-            isRight();
+            keySound("assets/images/right.mp3");
+            for (var i = 0; i<word.length; i++){
+                if (word[i] === presentGuess){
+                    currentDisplay[i] = presentGuess;
+                } 
+            }
+            rightGuesses = currentDisplay.join(""); // Change the array currentDisplay to string for comparison (somehow my array comparison isn't working???)
         }
-    };
-
-    function isWrong() {
-        keySound("assets/images/wrong.mp3");
-        guessRemain--;
-        wrongGuesses += presentGuess + ","; // Add to wronglGuesses. Does not require an array or for loop
-        
-    };
-
-    function isRight() {
-        keySound("assets/images/right.mp3");
-        for (var i = 0; i<word.length; i++){
-            if (word[i] === presentGuess){
-                currentDisplay[i] = presentGuess;
-            } 
-        }
-        rightGuesses = currentDisplay.join(""); // Change the array currentDisplay to string for comparison (somehow my array comparison isn't working???)
     };
 
     function playSong(s) { // key sounds function 
@@ -114,6 +105,11 @@ $(document).ready(function(){
         x.play();
     };
 
+    function imageDisplay(pic, name) {
+        var x = document.getElementById("image");
+        x.setAttribute("src", pic);
+        x.setAttribute("alt", name);
+    }
 
     function displayGame(){
         // Creating a variable to hold our new HTML. Our HTML now keeps track of the user input
@@ -129,17 +125,8 @@ $(document).ready(function(){
         "<p> " + guessRemain + "</p>" +
         "<p>LETTERS ALREADY GUESSED</p>" +
         "<p> " + wrongGuesses + "</p>";
-        
-        
+
         // Set the inner HTML contents of the #game div to our html string
         document.querySelector("#game").innerHTML = scoreBoard;
-        // document.querySelector("#image").innerHTML = rapImage;
     };
-
-    function imageDisplay(pic, name) {
-        var x = document.getElementById("image");
-        x.setAttribute("src", pic);
-        x.setAttribute("alt", name);
-    }
-
 });
