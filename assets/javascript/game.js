@@ -46,8 +46,9 @@ $(document).ready(function(){
             }
             if (guessRemain < 1) {
                 losses++;
-                imageDisplay("hangman.png", hanged);
-                document.querySelector("#rapper").innerHTML = "<p>Wrong</p>" + "<p>Hanged!!!</p>";
+                debugger;
+                imageDisplay("assets/images/hangman-rap.png", "hanged");
+                document.querySelector("#rapper").innerHTML = "<p>Wrong</p>" + "<p>Hanged!!!</p>" + "<p>Rapper is: </p>" + wordString;
                 playSong("assets/images/fail.mp3");
                 setTimeout(function() {
                     startGame();
