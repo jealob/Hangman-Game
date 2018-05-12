@@ -12,3 +12,4 @@ The game also keep track of the wins and looses.
 Enjoy!!!
 
 PS: The game is a simple one and it is open to modification correct.
+Link to train scheduler https://jealob.github.io/train-scheduler/
