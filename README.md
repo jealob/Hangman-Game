@@ -12,4 +12,4 @@ The game also keep track of the wins and looses.
 Enjoy!!!
 
 PS: The game is a simple one and it is open to modification correct.
-Check out train scheduler by clicking on this link https://jealob.github.io/train-scheduler/
+Check out train scheduler by clicking on this link https://jealob.github.io/Hangman-Game/
