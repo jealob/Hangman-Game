@@ -20,6 +20,7 @@ $(document).ready(function(){
     var rapImage;
     var rapSong;
     var stopSongRef;
+    
 
     // Start the Hangman game
     startGame();
@@ -27,6 +28,7 @@ $(document).ready(function(){
         presentGuess = event.key.toUpperCase(); // Returns pressed key.
         //Check if it is an alphabet and it already guessed and return position in allGuesses, make sure not to repeat both right or wrong guesses 
         if ((alphabet.search(presentGuess) !== -1) && (allGuesses.search(presentGuess) === -1)) { 
+            
             allGuesses += presentGuess;
             letterChecker();    // Check if guess is right or wrong
             displayGame();

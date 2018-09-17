@@ -11,4 +11,4 @@ When the player run out of guesses then that round is over and the player is han
 The game also keep track of the wins and looses.
 Enjoy!!!
 
-PS: The game is a simple one and it is open to modification correct.
+App is hosted on github pages on [here](https://jealob.github.io/Hangman-Game/).
